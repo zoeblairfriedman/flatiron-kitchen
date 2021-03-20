@@ -7,7 +7,6 @@ class RecipesController < ApplicationController
     end
 
     def create
-        binding.pry
         @recipe = Recipe.new(recipe_params)
         if @recipe.save
             redirect_to recipe_path(@recipe)
@@ -20,11 +19,26 @@ class RecipesController < ApplicationController
         @recipe = Recipe.find_by(id: params[:id])
     end
 
+    def edit
+        @recipe = Recipe.find_by(id: params[:id])
+        @ingredients = Ingredient.all
+    end
+
+    def update
+        @recipe = Recipe.find_by(id: params[:id])
+        if @recipe.update(recipe_params)
+            redirect_to recipe_path(@recipe)
+        else
+            render :edit
+        end
+    end
+
+
 
 private
 
     def recipe_params
-        params.require(:recipe).permit(:name, :ingredients_attributes => [:name])
+        params.require(:recipe).permit(:name, :ingredient_ids => [])
     end
 
 end

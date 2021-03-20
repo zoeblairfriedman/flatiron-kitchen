@@ -1,13 +1,14 @@
 class Recipe < ApplicationRecord
     has_many :recipe_ingredients
     has_many :ingredients, through: :recipe_ingredients
+    validates_presence_of :name
 
-def ingredients_attributes=(ingredients_attributes)
-    binding.pry
-    ingredients_attributes.each do |ingredient_attribute|
-        self.ingredients.build(ingredient_attribute)
-    end
-end 
+    # def ingredients_attributes=(ingredients_attributes)
+    #     binding.pry
+    #     ingredients_attributes.each do |ingredient_attribute|
+    #         self.ingredients.build(ingredient_attribute)
+    #     end
+    # end 
 
 end
 
