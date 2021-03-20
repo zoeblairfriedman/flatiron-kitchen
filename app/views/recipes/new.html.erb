@@ -1,13 +1,15 @@
-<h1> New Recipe Form </h1>
-
-<%= form_for(@recipe) do |f| %>
-    <p>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-    </p>
-    <%= f.submit %>
-    <% end %>
-
-<form>
-
-
+<%=form_for(@recipe) do |f|%>
+    <%=f.label("Recipe Name:") %>
+    <%=f.text_field(:name) %>
+    <%=f.label("Ingredients:") %>
+    <%=f.fields_for :ingredients do |i| %>
+      <%=i.label "Name"%>
+      <%=i.text_field :name%>
+      <%=i.label "Name"%>
+      <%=i.text_field :name%>
+      <%=i.label "Name"%>
+      <%=i.text_field :name%>
+      <%= f.collection_check_boxes :ingredient_ids, @ingredients, :id, :name %>
+    <%end%>
+    <%=f.submit "Submit"%>
+  <%end%>
